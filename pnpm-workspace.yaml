@@ -1,2 +1,7 @@
 packages:
-  - 'packages/*'
+  - packages/*
+onlyBuiltDependencies:
+  - '@sveltejs/kit'
+  - canvas
+  - esbuild
+  - svelte-preprocess
