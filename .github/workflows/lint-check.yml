@@ -2,7 +2,7 @@ name: Check code
 
 on:
   pull_request:
-    types: [ opened, edited, reopened, synchronize ]
+    types: [opened, edited, reopened, synchronize]
 jobs:
   check:
     runs-on: ubuntu-22.04
@@ -16,7 +16,6 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
           run_install: false
       - name: Get pnpm store directory
         id: pnpm-cache
