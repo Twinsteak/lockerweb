@@ -11,11 +11,16 @@ import {
 } from '../../../util/error.js';
 import { verifyPayload } from '../../../util/access.js';
 
+export const validateData = (data: User[]): boolean => {
+  return data.every((user) => !isNaN(parseInt(user.id)));
+};
+
 export const batchPutUserHandler: APIGatewayProxyHandler = async (event) => {
   const token = (event.headers.Authorization ?? '').replace('Bearer ', '');
   let data: User[];
   try {
     data = JSON.parse(event.body) as User[];
+    if (!validateData(data)) return errorResponse(new BadRequestError('User id is not an number'));
   } catch {
     return errorResponse(new BadRequestError('Request body is malformed JSON'));
   }
