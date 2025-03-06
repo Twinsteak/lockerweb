@@ -101,7 +101,7 @@
   {title}
   bind:open
   primaryText="업로드"
-  primaryDisabled={!users && isValidData}
+  primaryDisabled={!users || !isValidData}
   isPrimaryBtnIconRight
   isSecondaryBtnIconRight
   {...$$restProps}>
