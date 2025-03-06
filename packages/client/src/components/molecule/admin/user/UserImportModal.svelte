@@ -30,6 +30,7 @@
   let nameConversion = null;
   let overwrite = false;
   let dropdownItems = [];
+  let isValidData = false;
 
   let users: User[];
 
@@ -52,15 +53,16 @@
   }
 
   $: if (data) {
+    isValidData = false;
     const updatedItems = data
       ? [
-          ...Object.keys(data[0])
-            .filter((k) => k !== '__rowNum__')
-            .map((k, idx) => ({
-              id: idx,
-              name: k,
-            })),
-        ]
+        ...Object.keys(data[0])
+          .filter((k) => k !== '__rowNum__')
+          .map((k, idx) => ({
+            id: idx,
+            name: k,
+          })),
+      ]
       : [];
     if (!isEqual(dropdownItems, updatedItems)) dropdownItems = updatedItems;
   }
@@ -71,13 +73,16 @@
   }
 
   $: if (department && workbook && data && userConversion !== null && nameConversion !== null) {
-    const newUsers = data.map((userRow) => ({
-      id: userRow[dropdownItems[userConversion].name],
-      name: userRow[dropdownItems[nameConversion].name],
-      department: department,
-      isAdmin: false,
-    }));
-    if (!isEqual(newUsers, users)) users = newUsers;
+    if (data.every((userRow) => !isNaN(parseInt(userRow[dropdownItems[userConversion].name])))) {
+      isValidData = true;
+      const newUsers = data.map((userRow) => ({
+        id: userRow[dropdownItems[userConversion].name],
+        name: userRow[dropdownItems[nameConversion].name],
+        department: department,
+        isAdmin: false,
+      }));
+      if (!isEqual(newUsers, users)) users = newUsers;
+    }
   }
 
   function closeModal() {
@@ -96,7 +101,7 @@
   {title}
   bind:open
   primaryText="업로드"
-  primaryDisabled={!users}
+  primaryDisabled={!users && isValidData}
   isPrimaryBtnIconRight
   isSecondaryBtnIconRight
   {...$$restProps}>
