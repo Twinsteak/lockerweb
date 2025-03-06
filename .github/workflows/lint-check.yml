@@ -5,29 +5,19 @@ on:
     types: [opened, edited, reopened, synchronize]
 jobs:
   check:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 21
-      - name: Enable corepack
-        run: corepack enable
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
           run_install: false
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        run: |
-          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
+      - uses: actions/setup-node@v4
         with:
-          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+          node-version: 22
+          cache: pnpm
+      - name: Enable corepack
+        run: corepack enable
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
       - name: Build client

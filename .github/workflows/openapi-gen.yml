@@ -5,9 +5,14 @@ on:
   push:
     branches:
       - dev
+
+permissions:
+  pages: write
+  id-token: write
+
 jobs:
   openapi-gen:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     permissions: write-all
     steps:
       - name: Checkout
@@ -15,10 +20,12 @@ jobs:
       - name: Generate Swagger UI
         uses: Legion2/swagger-ui-action@v1
         with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           output: swagger-ui
           spec-file: "packages/server/api.yaml"
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: swagger-ui
+          path: swagger-ui
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
