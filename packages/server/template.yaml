@@ -47,7 +47,7 @@ Resources:
     Properties:
       CodeUri: ./dist
       Handler: common.localCorsHandler
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Architectures:
         - x86_64
       Events:
@@ -129,19 +129,19 @@ Resources:
   DependenciesLayer:
     Type: AWS::Serverless::LayerVersion
     Metadata:
-      BuildMethod: nodejs20.x
+      BuildMethod: nodejs22.x
     Properties:
       LayerName: 'dependencies'
       ContentUri: dependencies/
       CompatibleRuntimes:
-        - nodejs20.x
+        - nodejs22.x
   # Backend Lambda Resources
   AuthLoginFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: ./dist
       Handler: handler.auth.loginHandler
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Layers:
         - !Ref DependenciesLayer
       Policies:
@@ -161,7 +161,7 @@ Resources:
     Properties:
       CodeUri: ./dist
       Handler: handler.auth.logoutHandler
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Layers:
         - !Ref DependenciesLayer
       Policies:
@@ -181,7 +181,7 @@ Resources:
     Properties:
       CodeUri: ./dist
       Handler: handler.config.getConfigHandler
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Layers:
         - !Ref DependenciesLayer
       Policies:
@@ -201,7 +201,7 @@ Resources:
     Properties:
       CodeUri: ./dist
       Handler: handler.config.updateConfigHandler
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Layers:
         - !Ref DependenciesLayer
       Policies:
@@ -221,7 +221,7 @@ Resources:
     Properties:
       CodeUri: ./dist
       Handler: handler.config.deleteConfigHandler
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Layers:
         - !Ref DependenciesLayer
       Policies:
@@ -241,7 +241,7 @@ Resources:
     Properties:
       CodeUri: ./dist
       Handler: handler.locker.claimLockerHandler
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Layers:
         - !Ref DependenciesLayer
       Policies:
@@ -261,7 +261,7 @@ Resources:
     Properties:
       CodeUri: ./dist
       Handler: handler.locker.unclaimLockerHandler
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Layers:
         - !Ref DependenciesLayer
       Policies:
@@ -281,7 +281,7 @@ Resources:
     Properties:
       CodeUri: ./dist
       Handler: handler.locker.getClaimedLockerCountHandler
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Layers:
         - !Ref DependenciesLayer
       Policies:
@@ -301,7 +301,7 @@ Resources:
     Properties:
       CodeUri: ./dist
       Handler: handler.locker.queryClaimedLockersHandler
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Layers:
         - !Ref DependenciesLayer
       Policies:
@@ -321,7 +321,7 @@ Resources:
     Properties:
       CodeUri: ./dist
       Handler: handler.user.getUserHandler
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Layers:
         - !Ref DependenciesLayer
       Policies:
@@ -341,7 +341,7 @@ Resources:
     Properties:
       CodeUri: ./dist
       Handler: handler.user.queryUserHandler
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Layers:
         - !Ref DependenciesLayer
       Policies:
@@ -361,7 +361,7 @@ Resources:
     Properties:
       CodeUri: ./dist
       Handler: handler.user.updateUserHandler
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Layers:
         - !Ref DependenciesLayer
       Policies:
@@ -381,7 +381,7 @@ Resources:
     Properties:
       CodeUri: ./dist
       Handler: handler.user.deleteUserHandler
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Layers:
         - !Ref DependenciesLayer
       Policies:
@@ -401,7 +401,7 @@ Resources:
     Properties:
       CodeUri: ./dist
       Handler: handler.user.batchDeleteUserHandler
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Layers:
         - !Ref DependenciesLayer
       Policies:
@@ -421,7 +421,7 @@ Resources:
     Properties:
       CodeUri: ./dist
       Handler: handler.user.batchPutUserHandler
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Layers:
         - !Ref DependenciesLayer
       Policies:

@@ -20,7 +20,7 @@
   export { clazz as class };
 
   let src: string;
-  let highlightSrc: string;
+  let highlightSrc: string = null;
   let alt = '배치도';
 
   $: if ($config.success && selectedBuildingId) {
@@ -30,6 +30,7 @@
       selectedBuildingId,
     )} ${selectedFloor}층 배치도`;
     src = resolveFloorMapSrc(selectedBuildingId, selectedFloor);
+    highlightSrc = null;
   }
 
   $: if ($config.success && selectedSectionId) {
@@ -37,7 +38,7 @@
   }
 </script>
 
-{#key `${selectedBuildingId}-${selectedFloor}`}
+{#key `${selectedBuildingId}-${selectedFloor}-${selectedSectionId}`}
   <!-- TODO: load highlight position in database -->
   <MapCanvas class={clazz} {src} {alt} {highlightSrc} highlightX={0} highlightY={0} />
 {/key}

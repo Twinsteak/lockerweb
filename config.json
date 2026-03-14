@@ -370,21 +370,6 @@
           "id": "05",
           "name": "형남공학관",
           "lockers": {
-            "1": {
-              "N": {
-                "subsections": [
-                  {
-                    "department": "E",
-                    "range": [
-                      541,
-                      570
-                    ]
-                  }
-                ],
-                "disabled": [],
-                "height": 5
-              }
-            },
             "3": {
               "A": {
                 "subsections": [
@@ -586,6 +571,19 @@
                   12
                 ],
                 "height": 5
+              },
+              "N": {
+                "subsections": [
+                  {
+                    "department": "E",
+                    "range": [
+                      541,
+                      570
+                    ]
+                  }
+                ],
+                "disabled": [],
+                "height": 5
               }
             }
           }
@@ -594,8 +592,8 @@
       "alert": "문의 | 인스타그램 @it_soongsil"
     },
     {
-      "id": "A",
-      "name": "AI융합학부"
+      "id": "AS",
+      "name": "AI소프트웨어학부"
     },
     {
       "id": "C",
